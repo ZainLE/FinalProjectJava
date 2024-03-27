@@ -33,3 +33,17 @@ public class Trade {
     public String getProductID() {
         return productID;
     }
+
+    @Override
+    public String toString() {
+        return "Trade{" +
+                "source='" + source + '\'' +
+                ", side='" + side + '\'' +
+                ", size=" + size +
+                ", price=" + price +
+                ", productID='" + productID + '\'' +
+                '}';
+    }
+}
+
+

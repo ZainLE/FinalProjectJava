@@ -1,5 +1,4 @@
 package decentralisedfinance;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -36,3 +35,21 @@ public class Main {
                 continue;
             }
 
+            String source = messageParts[0];
+            String side = messageParts[1];
+            int size = Integer.parseInt(messageParts[2]);
+            double price = Double.parseDouble(messageParts[3]);
+            String productID = messageParts[4];
+
+            Trade trade = new Trade(source, side, size, price, productID);
+            tradeManager.processTrade(trade, orderBook);
+        }
+
+        System.out.println("Executed Trades:");
+        for (Trade executedTrade : tradeManager.getExecutedTrades()) {
+            System.out.println(executedTrade.toString());
+        }
+
+        scanner.close();
+    }
+}
