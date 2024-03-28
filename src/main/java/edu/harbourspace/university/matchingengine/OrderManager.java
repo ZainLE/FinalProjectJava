@@ -1,24 +1,34 @@
-package decentralisedfinance;
+package edu.harbourspace.university.matchingengine;
+
+import edu.harbourspace.university.matchingengine.order.CancelOrder;
+import edu.harbourspace.university.matchingengine.order.CreateOrder;
+
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
-public class TradeManager {
+public class OrderManager {
+    private final Map<String, OrderBook> orderBook;
     private int maxPosition;
     private List<Trade> executedTrades;
 
-    public TradeManager(int maxPosition) {
+    public OrderManager(int maxPosition) {
         this.maxPosition = maxPosition;
         this.executedTrades = new ArrayList<>();
     }
 
-    public void processTrade(Trade trade, OrderBook orderBook) {
-        if (trade.getSource().equals("DF")) {
-            if (canExecuteTrade(trade, orderBook)) {
-                executeTrade(trade, orderBook);
+    public List<Trade> processOrder(CreateOrder order) {
+        if (order.getSource().equals("DF")) {
+            if (canExecuteTrade(order, orderBook)) {
+                executeTrade(order, orderBook);
             }
         } else {
-            acceptOrRejectTrade(trade, orderBook);
+            acceptOrRejectTrade(order, orderBook);
         }
+    }
+
+    public List<Trade> processCancelOrder(CancelOrder order) {
+       // Process Cancel order
     }
 
     private boolean canExecuteTrade(Trade trade, OrderBook orderBook) {
